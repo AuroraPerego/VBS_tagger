@@ -27,14 +27,14 @@
 using namespace Pythia8;
 using namespace fastjet;
 
-const Int_t MAX_PARTICLES = 3000;
-const Int_t MAX_SLIMMED_PARTICLES = 30;
-const Int_t MAX_LHE = 20;
+const long unsigned int MAX_PARTICLES = 3000;
+const long unsigned int MAX_SLIMMED_PARTICLES = 3000;
+const long unsigned int MAX_LHE = 2000;
 
 void setup_pythia(Pythia &pythia, char *filename)
 {
-  pythia.readString("Main:numberOfEvents = 10");
-  pythia.readString("Main:timesAllowErrors = 3");
+  pythia.readString("Main:numberOfEvents = 10000");
+  pythia.readString("Main:timesAllowErrors = 10");
   pythia.readString("Beams:frameType = 4");
   pythia.readString("Beams:LHEF = " + std::string(filename));
   pythia.readString("Init:showChangedSettings = off");
@@ -146,6 +146,7 @@ int main(int argc, char *argv[])
   int iAbort = 0;
   for (int iEvent = 0; iEvent < nEvent; ++iEvent)
   {
+    std::cout << "iEvent "  << iEvent << "\n";
 
     // Generate event.
     if (!(pythia.next() && reader.readEvent()))
