@@ -8,7 +8,7 @@
 #*                *                       *                 *
 #*                                                          *
 #*                                                          *
-#*         VERSION 3.5.4                 2024-04-05         *
+#*         VERSION 2.9.20                2024-06-17         *
 #*                                                          *
 #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
 #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
@@ -24,7 +24,6 @@ set group_subprocesses Auto
 set ignore_six_quark_processes False
 set low_mem_multicore_nlo_generation False
 set complex_mass_scheme False
-set include_lepton_initiated_processes False
 set gauge unitary
 set loop_optimized_output True
 set loop_color_flows False
@@ -32,7 +31,6 @@ set max_npoint_for_channel 0
 set default_unset_couplings 99
 set max_t_for_channel 99
 set zerowidth_tchannel True
-set nlo_mixed_expansion True
 import model sm
 define p = g u c d s u~ c~ d~ s~
 define j = g u c d s u~ c~ d~ s~
@@ -40,5 +38,7 @@ define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-generate p p > l+ l- j j QCD=0
-output VBFZdir
+define  l+ = e+ mu+ ta+
+define l- = e- mu- ta-
+generate p p > l+ l- j j SMHLOOP=0 QED=99 QCD=0 NP=1
+output Zjj
